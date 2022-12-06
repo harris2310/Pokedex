@@ -1,0 +1,10 @@
+.pokemon-list-main {
+  width: 80%;
+  height: 100%;
+  background-color: #2b3a55;
+}
+
+.list-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
