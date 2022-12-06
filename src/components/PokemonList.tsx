@@ -1,19 +1,21 @@
 import React from "react";
 import "../styles/PokemonList.css";
-import { Pokemon, Props } from "../types";
+import type { PokeList } from "../types";
+import PokemonListItem from "./PokemonListItem";
 
-type Pokemon = { name: string; url: string };
-
-type Props = { pokemon: { count: number; next: string | null; previous: string | null; results: Array<Pokemon> } };
+type Props = { pokemon: PokeList };
 
 function PokemonList({ pokemon }: Props) {
-  console.log(pokemon);
   return (
     <div className='pokemon-list-main'>
       PokemonList
       <div className='list-columns'>
-        {pokemon.results.map((pok) => {
-          return <div key={pok.name}>{pok.name}</div>;
+        {pokemon.results.map((pok: { url: string; name: string }) => {
+          return (
+            <div key={pok.name}>
+              <PokemonListItem pok={pok} />
+            </div>
+          );
         })}
       </div>
     </div>
