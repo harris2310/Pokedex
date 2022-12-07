@@ -30,6 +30,7 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, hand
       document.removeEventListener("keydown", keyDownHandler);
     };
   }, []);
+  console.log(evolutions);
 
   return (
     <div className='modal-content'>
@@ -63,15 +64,16 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, hand
         ) : (
           <>
             {evolutions.map((ev, i): any => {
-              console.log(evolutions[i]);
-              return (
-                <div key={ev.name} className='evolutions-flex-item'>
-                  <img data-ev={i} id={ev.name === pok.name ? "selected" : ""} alt='Evolution' width='60' height='60' src={ev.sprites.front_default} onClick={handleEvolutionClick} />
-                  <div data-ev={i} id={ev.name === pok.name ? "selected" : ""} style={{ fontSize: "15px" }} onClick={handleEvolutionClick}>
-                    {ev.name.charAt(0).toUpperCase() + ev.name.slice(1)}
+              if (ev !== undefined) {
+                return (
+                  <div key={ev.name} className='evolutions-flex-item'>
+                    <img data-ev={i} id={ev.name === pok.name ? "selected" : ""} alt='Evolution' width='60' height='60' src={ev.sprites.front_default} onClick={handleEvolutionClick} />
+                    <div data-ev={i} id={ev.name === pok.name ? "selected" : ""} style={{ fontSize: "15px" }} onClick={handleEvolutionClick}>
+                      {ev.name.charAt(0).toUpperCase() + ev.name.slice(1)}
+                    </div>
                   </div>
-                </div>
-              );
+                );
+              }
             })}
           </>
         )}

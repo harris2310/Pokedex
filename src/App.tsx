@@ -12,7 +12,6 @@ function App() {
   useEffect(() => {
     (async () => {
       const result = await fetchPokemonInit();
-      console.log(result);
       setPokemon(result);
     })();
   }, []);

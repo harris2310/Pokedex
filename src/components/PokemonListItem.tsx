@@ -13,7 +13,6 @@ function PokemonListItem({ pok, handleEvolutionClick, evolutions, handleEvolutio
     setOpen(false);
   };
   const handleCloseClick = (e: any) => {
-    console.log(e.target);
     if (open === true) {
       if (!e.target.classList.contains("modal-content")) {
         setOpen(false);
@@ -23,7 +22,7 @@ function PokemonListItem({ pok, handleEvolutionClick, evolutions, handleEvolutio
   return (
     <div onClick={handleOpen} className='pokemon-list-item'>
       <img src={pok.sprites.front_default} alt='Default Pokemon' width='90' height='90' />
-      <div onClick={handleOpen} className='pokemon-name'>
+      <div className='pokemon-name'>
         {/* Για να ειναι το πρωτο γραμμα κεφαλαιο*/}
         {pok.name.charAt(0).toUpperCase() + pok.name.slice(1)}
       </div>
