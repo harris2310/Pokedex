@@ -4,8 +4,7 @@ import type { PokeListModal } from "../types";
 import { statToShow } from "../utils/statToShow";
 import { fetchPokemon } from "../utils/fetchPokemon";
 
-const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal) => {
-  const [evolutions, setEvolutions] = useState<Array<any>>([]);
+const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, handleEvolutions }: PokeListModal) => {
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (event.key === "Escape") {
@@ -23,7 +22,7 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal)
       const data1 = await fetchPokemon(ev1URL);
       const data2 = await fetchPokemon(ev2URL);
       const data3 = await fetchPokemon(ev3URL);
-      setEvolutions([data1, data2, data3]);
+      handleEvolutions([data1, data2, data3]);
     })();
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
@@ -60,8 +59,8 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal)
           console.log(evolutions[i]);
           return (
             <div key={ev.name} className='evolutions-flex-item'>
-              <img alt='Evolution' width='60' height='60' src={ev.sprites.front_default} onClick={handleEvolutionClick} />
-              <div style={{ fontSize: "15px" }} onClick={handleEvolutionClick}>
+              <img data-ev={i} alt='Evolution' width='60' height='60' src={ev.sprites.front_default} onClick={handleEvolutionClick} />
+              <div data-ev={i} style={{ fontSize: "15px" }} onClick={handleEvolutionClick}>
                 {ev.name}
               </div>
             </div>

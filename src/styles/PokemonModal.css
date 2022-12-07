@@ -27,7 +27,7 @@
 .evolutions-flex {
   display: flex;
   margin-top: 1rem;
-  justify-content: space-between;
+  justify-content: space-evenly;
   gap: 2rem;
   align-items: center;
 }

@@ -6,6 +6,7 @@ import type { PokeList } from "./types";
 
 function App() {
   const [pokemon, setPokemon] = useState<PokeList>([]);
+  const [evolutions, setEvolutions] = useState<Array<any>>([]);
 
   useEffect(() => {
     let pokePromises: Array<any> = [];
@@ -25,14 +26,15 @@ function App() {
 
   const handleEvolutionClick = (e: any) => {
     const evolution = e.target.getAttribute("data-ev");
-    if (evolution != undefined) {
-      setPokemon([evolution]);
-    }
+    setPokemon([evolutions[evolution]]);
+  };
+  const handleEvolutions = (data: Array<any>) => {
+    setEvolutions(data);
   };
   return (
     <div className='App'>
       <Navbar handlePokemonChange={handlePokemonChange} />
-      <PokemonList pokemon={pokemon} handleEvolutionClick={handleEvolutionClick} />
+      <PokemonList pokemon={pokemon} handleEvolutionClick={handleEvolutionClick} evolutions={evolutions} handleEvolutions={handleEvolutions} />
     </div>
   );
 }

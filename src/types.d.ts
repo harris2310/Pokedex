@@ -12,4 +12,6 @@ export type PokeListModal = {
   };
   handleClose: () => void;
   handleEvolutionClick: (e: any) => void;
+  evolutions: any[];
+  handleEvolutions: (data: any[]) => void;
 };
