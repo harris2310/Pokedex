@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler, FormEvent, useState, useRef, useEffect } from "react";
 import "../styles/Navbar.css";
 import pokedexURL from "../logo.png";
+import fetchPokemonInit from "../utils/fetchPokemonInit";
 
 type Props = { handlePokemonChange: Function; handleLogoClick: (e: any) => void };
 
@@ -23,12 +24,17 @@ const Navbar = ({ handlePokemonChange, handleLogoClick }: Props) => {
       setFetchError(false);
     }
   };
-  const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSearchSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch(`https://pokeapi.co/api/v2/pokemon/${value}`)
-      .then((response) => response.json())
-      .then((data) => handlePokemonChange(data))
-      .catch((err) => setFetchError(true));
+    if (value == "") {
+      const result = await fetchPokemonInit();
+      handlePokemonChange(result);
+    } else {
+      fetch(`https://pokeapi.co/api/v2/pokemon/${value}`)
+        .then((response) => response.json())
+        .then((data) => handlePokemonChange([data]))
+        .catch((err) => setFetchError(true));
+    }
   };
   return (
     <div className='navbar-main'>
@@ -36,7 +42,7 @@ const Navbar = ({ handlePokemonChange, handleLogoClick }: Props) => {
         <img src={pokedexURL} width='40' height='30' alt='pokedex' />
       </div>
       <form onSubmit={handleSearchSubmit}>
-        <input ref={focused} placeholder='Type a Pokemon' onChange={handleInputChange} className={fetchError ? "search-input-error" : "search-input"} required autoFocus />
+        <input ref={focused} placeholder='Type a Pokemon' onChange={handleInputChange} className={fetchError ? "search-input-error" : "search-input"} autoFocus />
         <button type='submit' className='submit-button'>
           Submit
         </button>

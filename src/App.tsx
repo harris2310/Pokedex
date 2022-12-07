@@ -17,7 +17,8 @@ function App() {
   }, []);
 
   const handlePokemonChange = (data: any) => {
-    setPokemon([data]);
+    console.log(data);
+    setPokemon(data);
   };
 
   const handleLogoClick = async (e: any) => {
