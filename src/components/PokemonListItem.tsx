@@ -12,12 +12,22 @@ function PokemonListItem({ pok }: Props) {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleCloseClick = (e: any) => {
+    console.log(e.target);
+    if (open == true) {
+      if (!e.target.classList.contains("modal-content")) {
+        setOpen(false);
+      }
+    }
+  };
   return (
-    <div>
+    <div onClick={handleCloseClick}>
       <button onClick={handleOpen} type='button'>
         {pok.name}
       </button>
+      {/* Αν το state ειναι open render την open class */}
       <div className={open ? "modal-open" : "modal-closed"}>
+        {" "}
         <PokemonModal pok={pok} handleClose={handleClose} />
       </div>
     </div>
