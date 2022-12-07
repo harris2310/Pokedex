@@ -9,7 +9,6 @@ function App() {
 
   useEffect(() => {
     let pokePromises: Array<any> = [];
-    let pokemonData: Array<Object> = [];
     for (let i = 1; i <= 15; i++) {
       const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
       pokePromises.push(fetch(url).then((res) => res.json()));
@@ -25,10 +24,14 @@ function App() {
     setPokemon([data]);
   };
 
+  const handleEvolutionClick = () => {
+    console.log("his");
+  };
+
   return (
     <div className='App'>
       <Navbar handlePokemonChange={handlePokemonChange} />
-      <PokemonList pokemon={pokemon} />
+      <PokemonList pokemon={pokemon} handleEvolutionClick={handleEvolutionClick} />
     </div>
   );
 }

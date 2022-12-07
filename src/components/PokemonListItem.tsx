@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "../styles/PokemonListItem.css";
 import PokemonModal from "./PokemonModal";
 
-type Props = { pok: any };
+type Props = { pok: any; handleEvolutionClick: () => void };
 
-function PokemonListItem({ pok }: Props) {
+function PokemonListItem({ pok, handleEvolutionClick }: Props) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -28,7 +28,7 @@ function PokemonListItem({ pok }: Props) {
         {pok.name.charAt(0).toUpperCase() + pok.name.slice(1)}
       </div>
       {/* Αν το state ειναι open render την open class */}
-      <div className={open ? "modal-open" : "modal-closed"}> {open ? <PokemonModal pok={pok} handleClose={handleClose} /> : ""}</div>
+      <div className={open ? "modal-open" : "modal-closed"}> {open ? <PokemonModal pok={pok} handleClose={handleClose} handleEvolutionClick={handleEvolutionClick} /> : ""}</div>
     </div>
   );
 }

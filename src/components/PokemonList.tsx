@@ -3,9 +3,9 @@ import "../styles/PokemonList.css";
 import type { PokeList } from "../types";
 import PokemonListItem from "./PokemonListItem";
 
-type Props = { pokemon: PokeList };
+type Props = { pokemon: PokeList; handleEvolutionClick: () => void };
 
-function PokemonList({ pokemon }: Props) {
+function PokemonList({ pokemon, handleEvolutionClick }: Props) {
   return (
     <div className='pokemon-list-main'>
       <h2>PokemonList</h2>
@@ -13,7 +13,7 @@ function PokemonList({ pokemon }: Props) {
         {pokemon.map((pok: any) => {
           return (
             <div key={pok.name}>
-              <PokemonListItem pok={pok} />
+              <PokemonListItem pok={pok} handleEvolutionClick={handleEvolutionClick} />
             </div>
           );
         })}

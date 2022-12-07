@@ -6,8 +6,10 @@ export type PokeListModal = {
     weight: number;
     name: string;
     species: { name: string; url: string };
+    sprites: { front_default: string };
     types: Array<{ slot: number; type: { name: string; url: string } }>;
     stats: Array<{ base_stat: number; effort: number; stat: { name: string; url: string } }>;
   };
   handleClose: () => void;
+  handleEvolutionClick: (e: any) => void;
 };
