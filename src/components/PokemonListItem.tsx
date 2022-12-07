@@ -20,7 +20,7 @@ function PokemonListItem({ pok, handleEvolutionClick, evolutions, handleEvolutio
     }
   };
   return (
-    <div onClick={handleOpen} className='pokemon-list-item'>
+    <div onClick={handleOpen} className={open ? "pokemon-list-item" : "pokemon-list-item-anim"}>
       <img src={pok.sprites.front_default} alt='Default Pokemon' width='90' height='90' />
       <div className='pokemon-name'>
         {/* Για να ειναι το πρωτο γραμμα κεφαλαιο*/}

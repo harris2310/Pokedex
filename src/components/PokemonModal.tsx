@@ -35,14 +35,17 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, hand
   return (
     <div className='modal-content'>
       <h3> {pok.name.charAt(0).toUpperCase() + pok.name.slice(1)}</h3>
-      <div>Height: {pok.height}</div>
-      <div>Weight: {pok.weight}</div>
-      <div className='types-flex'>
-        Types:
-        {pok.types.map((t) => {
-          return <div key={t.type.name}>{t.type.name.toUpperCase()}</div>;
-        })}
+      <div className='pokemon-body-flex'>
+        <div>Height: {pok.height}</div>
+        <div>Weight: {pok.weight}</div>
+        <div className='types-flex'>
+          Types:
+          {pok.types.map((t) => {
+            return <div key={t.type.name}>{t.type.name.toUpperCase()}</div>;
+          })}
+        </div>
       </div>
+
       <div className='stats-flex'>
         Stats:
         {pok.stats.map((s) => {

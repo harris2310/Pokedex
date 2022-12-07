@@ -5,7 +5,14 @@
   cursor: pointer;
 }
 
-.pokemon-list-item:hover {
+.pokemon-list-item-anim {
+  margin: 2rem;
+  background-color: #e5383b;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.pokemon-list-item-anim:hover {
   -webkit-animation-name: pokemon-list-item;
   -webkit-animation-duration: 200ms;
   -webkit-animation-timing-function: ease-in;

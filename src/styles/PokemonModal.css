@@ -15,13 +15,19 @@
 .types-flex {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .stats-flex {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 1rem;
+}
+
+.pokemon-body-flex {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2rem 0;
 }
 
 .evolutions-flex {

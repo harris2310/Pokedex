@@ -18,7 +18,7 @@ function PokemonList({ pokemon, handleEvolutionClick, evolutions, handleEvolutio
           );
         })}
       </div>
-      <button>Load More Pokemon</button>
+      <button type='button'>Load More Pokemon</button>
     </div>
   );
 }

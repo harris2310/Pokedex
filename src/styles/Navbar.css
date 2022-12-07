@@ -3,6 +3,8 @@
   padding: 1rem 0;
   width: 100%;
   text-align: center;
+  display: flex;
+  justify-content: space-around;
 }
 
 .submit-button {
@@ -27,8 +29,5 @@
 }
 
 .pokedex-logo {
-  position: absolute;
   cursor: pointer;
-  top: 1.2rem;
-  left: 2rem;
 }

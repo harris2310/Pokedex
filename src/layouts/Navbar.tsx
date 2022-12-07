@@ -7,6 +7,7 @@ type Props = { handlePokemonChange: Function; handleLogoClick: (e: any) => void 
 
 const Navbar = ({ handlePokemonChange, handleLogoClick }: Props) => {
   const [value, setValue] = useState<string>("");
+  const [types, setTypes] = useState([]);
   const [fetchError, setFetchError] = useState(false);
   const focused = useRef<any>(false);
 
@@ -47,6 +48,11 @@ const Navbar = ({ handlePokemonChange, handleLogoClick }: Props) => {
           Submit
         </button>
       </form>
+      <div>
+        <label htmlFor='grass'>grass</label>
+
+        <input type='checkbox' id='grass' />
+      </div>
     </div>
   );
 };
