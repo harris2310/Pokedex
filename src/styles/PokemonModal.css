@@ -1,8 +1,25 @@
 /* Modal Content/Box */
 .modal-content {
-  background-color: #161a1d;
-  margin: 15% auto; /* 15% from the top and centered */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #e5383b;
+  margin: 5% auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  border: 3px solid #161a1d;
+  color: white;
+  width: 50%;
+  text-align: center;
+}
+
+.types-flex {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.stats-flex {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
