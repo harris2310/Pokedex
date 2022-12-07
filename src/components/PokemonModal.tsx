@@ -1,20 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/PokemonModal.css";
 import type { PokeListModal } from "../types";
+import { statToShow } from "../utils/statToShow";
+import PokemonModalContent from "./PokemonModalContent";
+import { fetchPokemon } from "../utils/fetchPokemon";
 
 const PokemonModal = ({ pok, handleClose }: PokeListModal) => {
+  const [evolutions, setEvolutions] = useState([]);
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (event.key === "Escape") {
         event.preventDefault();
-
-        // 👇️ your logic here
         handleClose();
       }
     };
     document.addEventListener("keydown", keyDownHandler);
-
-    // 👇️ clean up event listener
+    (async () => {
+      let res = await fetch(pok.species.url);
+      let data = await res.json();
+      let resEv = await fetch(data.evolution_chain.url);
+      let ev_data = await resEv.json();
+      console.log(ev_data);
+      let ev1URL = ev_data.chain.species.url;
+      let ev2URL = ev_data.chain?.evolves_to[0]?.species?.url;
+      let ev3URL = ev_data.chain?.evolves_to[0]?.evolves_to[0]?.species.url;
+      const data1 = await fetchPokemon(ev1URL);
+      const data2 = await fetchPokemon(ev2URL);
+      const data3 = await fetchPokemon(ev3URL);
+    })();
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
@@ -28,31 +41,18 @@ const PokemonModal = ({ pok, handleClose }: PokeListModal) => {
       <div className='types-flex'>
         Types:
         {pok.types.map((t) => {
-          return <div>{t.type.name}</div>;
+          return <div key={t.type.name}>{t.type.name.toUpperCase()}</div>;
         })}
       </div>
       <div className='stats-flex'>
         Stats:
         {pok.stats.map((s) => {
-          let statToShow = "";
-          if (s.stat.name == "attack") {
-            statToShow = "ATK";
-          } else if (s.stat.name == "defense") {
-            statToShow = "DEF";
-          } else if (s.stat.name == "special-attack") {
-            statToShow = "S-ATK";
-          } else if (s.stat.name == "special-defense") {
-            statToShow = "S-DEF";
-          } else if (s.stat.name == "speed") {
-            statToShow = "SPD";
-          } else if (s.stat.name == "hp") {
-            statToShow = "HP";
-          }
+          let stat: string = statToShow(s)!; // Θαυμαστικο ωστε να ξερει η ts οτι δεν ειναι undefined
           return (
-            <div>
+            <div key={stat}>
               {s.base_stat}
               {"  "}
-              {statToShow}
+              {stat}
             </div>
           );
         })}

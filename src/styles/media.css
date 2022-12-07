@@ -1,0 +1,12 @@
+@media only screen and (max-width: 1200px) {
+  .list-columns {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .list-columns {
+    display: block !important;
+    grid-template-columns: none;
+  }
+}

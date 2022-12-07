@@ -28,10 +28,7 @@ function PokemonListItem({ pok }: Props) {
         {pok.name.charAt(0).toUpperCase() + pok.name.slice(1)}
       </div>
       {/* Αν το state ειναι open render την open class */}
-      <div className={open ? "modal-open" : "modal-closed"}>
-        {" "}
-        <PokemonModal pok={pok} handleClose={handleClose} />
-      </div>
+      <div className={open ? "modal-open" : "modal-closed"}> {open ? <PokemonModal pok={pok} handleClose={handleClose} /> : ""}</div>
     </div>
   );
 }

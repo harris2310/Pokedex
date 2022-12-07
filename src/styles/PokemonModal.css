@@ -2,7 +2,7 @@
 .modal-content {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
   background-color: #e5383b;
   margin: 5% auto;
   padding: 20px;

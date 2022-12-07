@@ -5,6 +5,7 @@ export type PokeListModal = {
     height: number;
     weight: number;
     name: string;
+    species: { name: string; url: string };
     types: Array<{ slot: number; type: { name: string; url: string } }>;
     stats: Array<{ base_stat: number; effort: number; stat: { name: string; url: string } }>;
   };
