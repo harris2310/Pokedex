@@ -18,7 +18,7 @@ const Navbar = ({ handlePokemonChange }: Props) => {
   return (
     <div className='navbar-main'>
       <form onSubmit={handleSearchSubmit}>
-        <input placeholder='Type a Pokemon' onChange={handleInputChange} className='search-input' />
+        <input placeholder='Type a Pokemon' onChange={handleInputChange} className='search-input' required />
         <button type='submit' className='submit-button'>
           Submit
         </button>

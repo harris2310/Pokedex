@@ -8,9 +8,9 @@ type Props = { pokemon: PokeList };
 function PokemonList({ pokemon }: Props) {
   return (
     <div className='pokemon-list-main'>
-      PokemonList
+      <h2>PokemonList</h2>
       <div className='list-columns'>
-        {pokemon.results.map((pok: { url: string; name: string }) => {
+        {pokemon.map((pok: any) => {
           return (
             <div key={pok.name}>
               <PokemonListItem pok={pok} />

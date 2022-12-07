@@ -5,16 +5,24 @@ import "./styles/App.css";
 import type { PokeList } from "./types";
 
 function App() {
-  const [pokemon, setPokemon] = useState<PokeList>({ count: 0, next: null, previous: null, results: [] });
+  const [pokemon, setPokemon] = useState<PokeList>([]);
 
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=20")
-      .then((response) => response.json())
-      .then((data) => setPokemon(data));
+    let pokePromises: Array<any> = [];
+    let pokemonData: Array<Object> = [];
+    for (let i = 1; i <= 15; i++) {
+      const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+      pokePromises.push(fetch(url).then((res) => res.json()));
+    }
+    // οταν ολοκληρωθουν τα fetch βαζω τα pokemon σε state
+    Promise.all(pokePromises).then((result) => {
+      setPokemon(result);
+      console.log(result);
+    });
   }, []);
 
   const handlePokemonChange = (data: any) => {
-    setPokemon({ count: 0, next: null, previous: null, results: [data] });
+    setPokemon([data]);
   };
 
   return (

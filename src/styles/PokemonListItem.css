@@ -1,3 +1,19 @@
+.pokemon-list-item {
+  margin: 2rem;
+  background-color: #e5383b;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.pokemon-name {
+  width: 50%;
+  margin: 0 auto;
+  font-weight: 500;
+  border-top: 4px solid white;
+  padding-top: 10px;
+  color: white;
+}
+
 .modal-closed {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
