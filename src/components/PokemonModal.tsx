@@ -5,7 +5,7 @@ import { statToShow } from "../utils/statToShow";
 import { fetchPokemon } from "../utils/fetchPokemon";
 
 const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal) => {
-  const [evolutions, setEvolutions] = useState<Array<Object>>([]);
+  const [evolutions, setEvolutions] = useState<Array<any>>([]);
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (event.key === "Escape") {
@@ -21,7 +21,6 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal)
       let ev2URL = ev_data.chain?.evolves_to[0]?.species?.url;
       let ev3URL = ev_data.chain?.evolves_to[0]?.evolves_to[0]?.species.url;
       const data1 = await fetchPokemon(ev1URL);
-      console.log(data1);
       const data2 = await fetchPokemon(ev2URL);
       const data3 = await fetchPokemon(ev3URL);
       setEvolutions([data1, data2, data3]);
@@ -30,7 +29,6 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal)
       document.removeEventListener("keydown", keyDownHandler);
     };
   }, []);
-  console.log(evolutions);
 
   return (
     <div className='modal-content'>
@@ -58,11 +56,14 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal)
       </div>
       <div className='evolutions-flex'>
         Evolutions:
-        {evolutions.map((ev: any) => {
+        {evolutions.map((ev, i): any => {
+          console.log(evolutions[i]);
           return (
-            <div className='evolutions-flex-item' onClick={handleEvolutionClick}>
-              <img alt='Evolution' src={ev.sprites.front_default} />
-              <div style={{ fontSize: "15px" }}>{ev.name}</div>
+            <div key={ev.name} className='evolutions-flex-item'>
+              <img alt='Evolution' width='60' height='60' src={ev.sprites.front_default} onClick={handleEvolutionClick} />
+              <div style={{ fontSize: "15px" }} onClick={handleEvolutionClick}>
+                {ev.name}
+              </div>
             </div>
           );
         })}

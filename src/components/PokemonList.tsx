@@ -3,7 +3,7 @@ import "../styles/PokemonList.css";
 import type { PokeList } from "../types";
 import PokemonListItem from "./PokemonListItem";
 
-type Props = { pokemon: PokeList; handleEvolutionClick: () => void };
+type Props = { pokemon: PokeList; handleEvolutionClick: (e: any) => void };
 
 function PokemonList({ pokemon, handleEvolutionClick }: Props) {
   return (

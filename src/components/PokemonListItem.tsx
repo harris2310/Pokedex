@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/PokemonListItem.css";
 import PokemonModal from "./PokemonModal";
 
-type Props = { pok: any; handleEvolutionClick: () => void };
+type Props = { pok: any; handleEvolutionClick: (e: any) => void };
 
 function PokemonListItem({ pok, handleEvolutionClick }: Props) {
   const [open, setOpen] = useState(false);

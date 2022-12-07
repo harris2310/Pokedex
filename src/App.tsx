@@ -16,7 +16,6 @@ function App() {
     // οταν ολοκληρωθουν τα fetch βαζω τα pokemon σε state
     Promise.all(pokePromises).then((result) => {
       setPokemon(result);
-      console.log(result);
     });
   }, []);
 
@@ -24,10 +23,12 @@ function App() {
     setPokemon([data]);
   };
 
-  const handleEvolutionClick = () => {
-    console.log("his");
+  const handleEvolutionClick = (e: any) => {
+    const evolution = e.target.getAttribute("data-ev");
+    if (evolution != undefined) {
+      setPokemon([evolution]);
+    }
   };
-
   return (
     <div className='App'>
       <Navbar handlePokemonChange={handlePokemonChange} />
