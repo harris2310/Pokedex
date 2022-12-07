@@ -1,7 +1,8 @@
 import React, { ChangeEventHandler, FormEvent, useState, useRef } from "react";
 import "../styles/Navbar.css";
+import pokedexURL from "../logo.png";
 
-type Props = { handlePokemonChange: Function };
+type Props = { handlePokemonChange: Function; handleLogoClick: (e: any) => void };
 
 // CNTR-F focus search bar
 window.onkeydown = function (e) {
@@ -11,7 +12,7 @@ window.onkeydown = function (e) {
   }
 };
 
-const Navbar = ({ handlePokemonChange }: Props) => {
+const Navbar = ({ handlePokemonChange, handleLogoClick }: Props) => {
   const [value, setValue] = useState<string>("");
   const [fetchError, setFetchError] = useState(false);
   const focused = useRef<any>(false);
@@ -31,6 +32,9 @@ const Navbar = ({ handlePokemonChange }: Props) => {
   };
   return (
     <div className='navbar-main'>
+      <div onClick={handleLogoClick} className='pokedex-logo'>
+        <img src={pokedexURL} width='40' height='30' alt='pokedex' />
+      </div>
       <form onSubmit={handleSearchSubmit}>
         <input ref={focused} placeholder='Type a Pokemon' onChange={handleInputChange} className={fetchError ? "search-input-error" : "search-input"} required />
         <button type='submit' className='submit-button'>

@@ -25,3 +25,10 @@
 .submit-button:hover {
   cursor: pointer;
 }
+
+.pokedex-logo {
+  position: absolute;
+  cursor: pointer;
+  top: 1.2rem;
+  left: 2rem;
+}

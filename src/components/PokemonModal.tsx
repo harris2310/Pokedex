@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import "../styles/PokemonModal.css";
 import type { PokeListModal } from "../types";
 import { statToShow } from "../utils/statToShow";
-import { fetchPokemon } from "../utils/fetchPokemon";
+import { fetchEvolutions } from "../utils/fetchEvolutions";
 
 const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, handleEvolutions }: PokeListModal) => {
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (event.key === "Escape") {
@@ -19,10 +20,11 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, hand
       let ev1URL = ev_data.chain.species.url;
       let ev2URL = ev_data.chain?.evolves_to[0]?.species?.url;
       let ev3URL = ev_data.chain?.evolves_to[0]?.evolves_to[0]?.species.url;
-      const data1 = await fetchPokemon(ev1URL);
-      const data2 = await fetchPokemon(ev2URL);
-      const data3 = await fetchPokemon(ev3URL);
+      const data1 = await fetchEvolutions(ev1URL);
+      const data2 = await fetchEvolutions(ev2URL);
+      const data3 = await fetchEvolutions(ev3URL);
       handleEvolutions([data1, data2, data3]);
+      setLoading(false);
     })();
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
@@ -31,7 +33,7 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, hand
 
   return (
     <div className='modal-content'>
-      <h3>{pok.name}</h3>
+      <h3> {pok.name.charAt(0).toUpperCase() + pok.name.slice(1)}</h3>
       <div>Height: {pok.height}</div>
       <div>Weight: {pok.weight}</div>
       <div className='types-flex'>
@@ -55,17 +57,24 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, hand
       </div>
       <div className='evolutions-flex'>
         Evolutions:
-        {evolutions.map((ev, i): any => {
-          console.log(evolutions[i]);
-          return (
-            <div key={ev.name} className='evolutions-flex-item'>
-              <img data-ev={i} alt='Evolution' width='60' height='60' src={ev.sprites.front_default} onClick={handleEvolutionClick} />
-              <div data-ev={i} style={{ fontSize: "15px" }} onClick={handleEvolutionClick}>
-                {ev.name}
-              </div>
-            </div>
-          );
-        })}
+        {/* Hack - Για να μειωθει το layout shift*/}
+        {loading ? (
+          <div style={{ height: "130px" }}>...</div>
+        ) : (
+          <>
+            {evolutions.map((ev, i): any => {
+              console.log(evolutions[i]);
+              return (
+                <div key={ev.name} className='evolutions-flex-item'>
+                  <img data-ev={i} id={ev.name === pok.name ? "selected" : ""} alt='Evolution' width='60' height='60' src={ev.sprites.front_default} onClick={handleEvolutionClick} />
+                  <div data-ev={i} id={ev.name === pok.name ? "selected" : ""} style={{ fontSize: "15px" }} onClick={handleEvolutionClick}>
+                    {ev.name.charAt(0).toUpperCase() + ev.name.slice(1)}
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        )}
       </div>
     </div>
   );
