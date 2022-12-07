@@ -12,6 +12,20 @@
   text-align: center;
 }
 
+.modal-close-button {
+  position: absolute;
+  color: white;
+  font-weight: 700;
+  border: 1px solid white;
+  top: 6rem;
+  right: 10em;
+  padding: 5px 10px;
+}
+
+.modal-close-button:hover {
+  cursor: pointer;
+}
+
 .types-flex {
   display: flex;
   justify-content: center;

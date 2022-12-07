@@ -10,7 +10,12 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, hand
     const keyDownHandler = (event: any) => {
       if (event.key === "Escape") {
         event.preventDefault();
-        handleClose();
+        handleClose(event);
+      }
+    };
+    const clickHandler = (e: any) => {
+      if (!e.target.classList.contains("modal-content")) {
+        handleClose(e);
       }
     };
     document.addEventListener("keydown", keyDownHandler);
@@ -30,58 +35,62 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, hand
       document.removeEventListener("keydown", keyDownHandler);
     };
   }, []);
-  console.log(evolutions);
 
   return (
-    <div className='modal-content'>
-      <h3> {pok.name.charAt(0).toUpperCase() + pok.name.slice(1)}</h3>
-      <div className='pokemon-body-flex'>
-        <div>Height: {pok.height}</div>
-        <div>Weight: {pok.weight}</div>
-        <div className='types-flex'>
-          Types:
-          {pok.types.map((t) => {
-            return <div key={t.type.name}>{t.type.name.toUpperCase()}</div>;
+    <>
+      <div onClick={handleClose}>
+        <div className='modal-close-button'>X</div>
+      </div>
+      <div className='modal-content'>
+        <h3> {pok.name.charAt(0).toUpperCase() + pok.name.slice(1)}</h3>
+        <div className='pokemon-body-flex'>
+          <div>Height: {pok.height}</div>
+          <div>Weight: {pok.weight}</div>
+          <div className='types-flex'>
+            Types:
+            {pok.types.map((t) => {
+              return <div key={t.type.name}>{t.type.name.toUpperCase()}</div>;
+            })}
+          </div>
+        </div>
+
+        <div className='stats-flex'>
+          Stats:
+          {pok.stats.map((s) => {
+            let stat: string = statToShow(s)!; // Θαυμαστικο ωστε να ξερει η ts οτι δεν ειναι undefined
+            return (
+              <div key={stat}>
+                {s.base_stat}
+                {"  "}
+                {stat}
+              </div>
+            );
           })}
         </div>
-      </div>
-
-      <div className='stats-flex'>
-        Stats:
-        {pok.stats.map((s) => {
-          let stat: string = statToShow(s)!; // Θαυμαστικο ωστε να ξερει η ts οτι δεν ειναι undefined
-          return (
-            <div key={stat}>
-              {s.base_stat}
-              {"  "}
-              {stat}
-            </div>
-          );
-        })}
-      </div>
-      <div className='evolutions-flex'>
-        Evolutions:
-        {/* Hack - Για να μειωθει το layout shift*/}
-        {loading ? (
-          <div style={{ height: "130px" }}>...</div>
-        ) : (
-          <>
-            {evolutions.map((ev, i): any => {
-              if (ev !== undefined) {
-                return (
-                  <div key={ev.name} className='evolutions-flex-item'>
-                    <img data-ev={i} id={ev.name === pok.name ? "selected" : ""} alt='Evolution' width='60' height='60' src={ev.sprites.front_default} onClick={handleEvolutionClick} />
-                    <div data-ev={i} id={ev.name === pok.name ? "selected" : ""} style={{ fontSize: "15px" }} onClick={handleEvolutionClick}>
-                      {ev.name.charAt(0).toUpperCase() + ev.name.slice(1)}
+        <div className='evolutions-flex'>
+          Evolutions:
+          {/* Hack - Για να μειωθει το layout shift*/}
+          {loading ? (
+            <div style={{ height: "130px" }}>...</div>
+          ) : (
+            <>
+              {evolutions.map((ev, i): any => {
+                if (ev !== undefined) {
+                  return (
+                    <div key={ev.name} className='evolutions-flex-item'>
+                      <img data-ev={i} id={ev.name === pok.name ? "selected" : ""} alt='Evolution' width='60' height='60' src={ev.sprites.front_default} onClick={handleEvolutionClick} />
+                      <div data-ev={i} id={ev.name === pok.name ? "selected" : ""} style={{ fontSize: "15px" }} onClick={handleEvolutionClick}>
+                        {ev.name.charAt(0).toUpperCase() + ev.name.slice(1)}
+                      </div>
                     </div>
-                  </div>
-                );
-              }
-            })}
-          </>
-        )}
+                  );
+                }
+              })}
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
