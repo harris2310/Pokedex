@@ -1,6 +1,9 @@
 .pokemon-list-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
   width: 80%;
-  height: 100%;
+  min-height: 100vh;
   background-color: #f5f3f4;
   text-align: center;
   color: black;
@@ -14,9 +17,32 @@
   padding: 10px;
 }
 
+.loading {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  margin: 0 auto;
+  margin-top: 20%;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  text-align: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .randomize-button {
   padding: 5px;
   font-weight: 600;
+  width: 10rem;
+  margin: 0 auto;
   background-color: #f5f3f4;
   color: #660708;
   cursor: pointer;

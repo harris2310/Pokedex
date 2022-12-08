@@ -9,11 +9,14 @@ import fetchRandom from "./utils/fetchRandom";
 function App() {
   const [pokemon, setPokemon] = useState<PokeList>([]);
   const [evolutions, setEvolutions] = useState<Array<any>>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
+      setLoading(true); // Οχι ιδανικο επειδη δεν ειναι synchrounous το set
       const result = await fetchPokemonInit();
       setPokemon(result);
+      setLoading(false);
     })();
   }, []);
 
@@ -23,8 +26,11 @@ function App() {
   };
 
   const handleLogoClick = async (e: any) => {
+    setLoading(true); // Οχι ιδανικο επειδη δεν ειναι synchrounous το set
+
     const result = await fetchPokemonInit();
     setPokemon(result);
+    setLoading(false);
   };
 
   const handleEvolutionClick = (e: any) => {
@@ -37,13 +43,22 @@ function App() {
     setEvolutions(data);
   };
   const handleRandomizeClick = async () => {
+    setLoading(true);
     const result = await fetchRandom();
     setPokemon(result);
+    setLoading(false);
   };
   return (
     <div className='App'>
       <Navbar handlePokemonChange={handlePokemonChange} handleLogoClick={handleLogoClick} />
-      <PokemonList pokemon={pokemon} handleEvolutionClick={handleEvolutionClick} evolutions={evolutions} handleEvolutions={handleEvolutions} handleRandomizeClick={handleRandomizeClick} />
+      <PokemonList
+        pokemon={pokemon}
+        loading={loading}
+        handleEvolutionClick={handleEvolutionClick}
+        evolutions={evolutions}
+        handleEvolutions={handleEvolutions}
+        handleRandomizeClick={handleRandomizeClick}
+      />
     </div>
   );
 }

@@ -9,15 +9,16 @@ Then npm start
 
 ## To-Do
 
-Random Pokemon\
 Search by type\
 Load More\
 Local Storage\
+Responsive\
 
 ## Done
 
 Ολα τα required\
 CNTRL + F\
 Escape\
+Somewhat responsive\
+Random Pokemon\
 Some animations
-
