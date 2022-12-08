@@ -3,12 +3,11 @@ import "../styles/Navbar.css";
 import pokedexURL from "../logo.png";
 import fetchPokemonInit from "../utils/fetchPokemonInit";
 
-type Props = { handlePokemonChange: Function; handleLogoClick: (e: any) => void };
+type Props = { favourites: Array<string>; handlePokemonChange: Function; handleLogoClick: (e: any) => void };
 
-const Navbar = ({ handlePokemonChange, handleLogoClick }: Props) => {
+const Navbar = ({ favourites, handlePokemonChange, handleLogoClick }: Props) => {
   const [value, setValue] = useState<string>("");
   const [types, setTypes] = useState<Array<string>>([]);
-  const [open, setOpen] = useState(false);
   const [fetchError, setFetchError] = useState(false);
   const focused = useRef<any>(false);
 
@@ -30,7 +29,7 @@ const Navbar = ({ handlePokemonChange, handleLogoClick }: Props) => {
     // Αν δεν εχει τιμη το input επεστρεψε τα αρχικα 15
     e.preventDefault();
     if (value == "") {
-      const result = await fetchPokemonInit();
+      const result = await fetchPokemonInit(favourites);
       handlePokemonChange(result);
     } else {
       fetch(`https://pokeapi.co/api/v2/pokemon/${value}`)

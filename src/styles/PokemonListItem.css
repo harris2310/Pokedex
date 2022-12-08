@@ -1,4 +1,5 @@
 .pokemon-list-item {
+  position: relative;
   margin: 2rem;
   background-color: #e5383b;
   padding: 2rem;
@@ -6,10 +7,29 @@
 }
 
 .pokemon-list-item-anim {
+  position: relative;
   margin: 2rem;
   background-color: #e5383b;
   padding: 2rem;
   cursor: pointer;
+}
+
+.item-favourite-white {
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
+  color: white;
+}
+
+.item-favourite-white:hover {
+  color: rgb(233, 222, 156);
+}
+
+.item-favourite-gold {
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
+  color: gold;
 }
 
 .pokemon-list-item-anim:hover {

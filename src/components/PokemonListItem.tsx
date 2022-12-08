@@ -2,21 +2,22 @@ import React, { useEffect, useState } from "react";
 import "../styles/PokemonListItem.css";
 import PokemonModal from "./PokemonModal";
 
-type Props = { pok: any; handleEvolutionClick: (e: any) => void; evolutions: any[]; handleEvolutions: (data: any[]) => void };
+type Props = { pok: any; favourites: Array<number>; handleFavouriteToggle: (e: any) => void; handleEvolutionClick: (e: any) => void; evolutions: any[]; handleEvolutions: (data: any[]) => void };
 
-function PokemonListItem({ pok, handleEvolutionClick, evolutions, handleEvolutions }: Props) {
+function PokemonListItem({ pok, favourites, handleFavouriteToggle, handleEvolutionClick, evolutions, handleEvolutions }: Props) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = (e: any) => {
-    console.log("hi");
-    console.log(open);
     setOpen(false);
   };
   return (
     <>
       <div onClick={handleOpen} className={open ? "pokemon-list-item" : "pokemon-list-item-anim"}>
+        <div id={pok.id} onClick={handleFavouriteToggle} className={favourites.includes(pok.id) ? "item-favourite-gold" : "item-favourite-white"}>
+          ★
+        </div>
         <img src={pok.sprites.front_default} alt='Default Pokemon' width='90' height='90' />
         <div className='pokemon-name'>
           {/* Για να ειναι το πρωτο γραμμα κεφαλαιο*/}

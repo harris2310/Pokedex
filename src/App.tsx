@@ -8,27 +8,28 @@ import fetchRandom from "./utils/fetchRandom";
 
 function App() {
   const [pokemon, setPokemon] = useState<PokeList>([]);
+  const [favourites, setFavourites] = useState<any>([]);
   const [evolutions, setEvolutions] = useState<Array<any>>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
       setLoading(true); // Οχι ιδανικο επειδη δεν ειναι synchrounous το set
-      const result = await fetchPokemonInit();
+      let favouritesArr = JSON.parse(localStorage.getItem("favourites")!); // fetch favourites from Local storage
+      setFavourites(favouritesArr);
+      const result = await fetchPokemonInit(favouritesArr);
       setPokemon(result);
       setLoading(false);
     })();
   }, []);
 
   const handlePokemonChange = (data: any) => {
-    console.log(data);
     setPokemon(data);
   };
 
   const handleLogoClick = async (e: any) => {
     setLoading(true); // Οχι ιδανικο επειδη δεν ειναι synchrounous το set
-
-    const result = await fetchPokemonInit();
+    const result = await fetchPokemonInit(favourites);
     setPokemon(result);
     setLoading(false);
   };
@@ -42,6 +43,20 @@ function App() {
   const handleEvolutions = (data: Array<any>) => {
     setEvolutions(data);
   };
+  const handleFavouriteToggle = (e: any) => {
+    e.stopPropagation(); // Ωστε να μην κανει trigger και το modal onClick
+    const target = parseInt(e.target.id);
+    if (favourites.includes(target)) {
+      let newFavourites = favourites.filter((f: number) => f !== target);
+      console.log(newFavourites);
+      localStorage.setItem("favourites", JSON.stringify(newFavourites));
+      setFavourites(newFavourites);
+    } else {
+      let newFavourites = [target, ...favourites];
+      localStorage.setItem("favourites", JSON.stringify(newFavourites));
+      setFavourites(newFavourites);
+    }
+  };
   const handleRandomizeClick = async () => {
     setLoading(true);
     const result = await fetchRandom();
@@ -50,9 +65,11 @@ function App() {
   };
   return (
     <div className='App'>
-      <Navbar handlePokemonChange={handlePokemonChange} handleLogoClick={handleLogoClick} />
+      <Navbar favourites={favourites} handlePokemonChange={handlePokemonChange} handleLogoClick={handleLogoClick} />
       <PokemonList
         pokemon={pokemon}
+        favourites={favourites}
+        handleFavouriteToggle={handleFavouriteToggle}
         loading={loading}
         handleEvolutionClick={handleEvolutionClick}
         evolutions={evolutions}

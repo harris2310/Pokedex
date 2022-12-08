@@ -3,9 +3,18 @@ import "../styles/PokemonList.css";
 import type { PokeList } from "../types";
 import PokemonListItem from "./PokemonListItem";
 
-type Props = { pokemon: PokeList; loading: boolean; handleEvolutionClick: (e: any) => void; evolutions: any[]; handleEvolutions: (data: any[]) => void; handleRandomizeClick: () => void };
+type Props = {
+  pokemon: PokeList;
+  favourites: Array<number>;
+  handleFavouriteToggle: (e: any) => void;
+  loading: boolean;
+  handleEvolutionClick: (e: any) => void;
+  evolutions: any[];
+  handleEvolutions: (data: any[]) => void;
+  handleRandomizeClick: () => void;
+};
 
-function PokemonList({ pokemon, loading, handleEvolutionClick, evolutions, handleEvolutions, handleRandomizeClick }: Props) {
+function PokemonList({ pokemon, favourites, handleFavouriteToggle, loading, handleEvolutionClick, evolutions, handleEvolutions, handleRandomizeClick }: Props) {
   return (
     <div className='pokemon-list-main'>
       <h2>Pokemon</h2>
@@ -19,7 +28,14 @@ function PokemonList({ pokemon, loading, handleEvolutionClick, evolutions, handl
           {pokemon.map((pok: any) => {
             return (
               <div key={pok.name}>
-                <PokemonListItem pok={pok} handleEvolutionClick={handleEvolutionClick} evolutions={evolutions} handleEvolutions={handleEvolutions} />
+                <PokemonListItem
+                  pok={pok}
+                  favourites={favourites}
+                  handleFavouriteToggle={handleFavouriteToggle}
+                  handleEvolutionClick={handleEvolutionClick}
+                  evolutions={evolutions}
+                  handleEvolutions={handleEvolutions}
+                />
               </div>
             );
           })}
