@@ -9,11 +9,15 @@ Then npm start
 
 ## To-Do
 
-Types
+Random Pokemon\
+Search by type\
+Load More\
+Local Storage\
 
 ## Done
 
 Ολα τα required\
 CNTRL + F\
 Escape\
+Some animations
 

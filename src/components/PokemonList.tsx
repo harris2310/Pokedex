@@ -3,12 +3,15 @@ import "../styles/PokemonList.css";
 import type { PokeList } from "../types";
 import PokemonListItem from "./PokemonListItem";
 
-type Props = { pokemon: PokeList; handleEvolutionClick: (e: any) => void; evolutions: any[]; handleEvolutions: (data: any[]) => void };
+type Props = { pokemon: PokeList; handleEvolutionClick: (e: any) => void; evolutions: any[]; handleEvolutions: (data: any[]) => void; handleRandomizeClick: () => void };
 
-function PokemonList({ pokemon, handleEvolutionClick, evolutions, handleEvolutions }: Props) {
+function PokemonList({ pokemon, handleEvolutionClick, evolutions, handleEvolutions, handleRandomizeClick }: Props) {
   return (
     <div className='pokemon-list-main'>
-      <h2>PokemonList</h2>
+      <h2>Pokemon</h2>
+      <button type='button' className='randomize-button' onClick={handleRandomizeClick}>
+        Randomize
+      </button>
       <div className='list-columns'>
         {pokemon.map((pok: any) => {
           return (
