@@ -16,6 +16,13 @@
   border: 1px solid white;
 }
 
+.dropdown-button {
+  background-color: #e5383b;
+  cursor: pointer;
+  padding: 5px;
+  color: white;
+}
+
 .search-input {
   padding: 5px;
 }
