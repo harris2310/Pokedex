@@ -24,12 +24,12 @@ Testing\
 
 Search by multiple types - Change from select to something with multiple choice\
 Load More\
-Local Storage\
 Responsive\
 
 ## Done
 
 Ολα τα required\
+Local Storage\
 Search by type\
 CNTRL + F\
 Escape\
@@ -37,4 +37,3 @@ Loading...\
 Somewhat responsive\
 Random Pokemon\
 Some animations
-
