@@ -8,6 +8,7 @@ type Props = { handlePokemonChange: Function; handleLogoClick: (e: any) => void 
 const Navbar = ({ handlePokemonChange, handleLogoClick }: Props) => {
   const [value, setValue] = useState<string>("");
   const [types, setTypes] = useState([]);
+  const [open, setOpen] = useState(false);
   const [fetchError, setFetchError] = useState(false);
   const focused = useRef<any>(false);
 
@@ -37,6 +38,9 @@ const Navbar = ({ handlePokemonChange, handleLogoClick }: Props) => {
         .catch((err) => setFetchError(true));
     }
   };
+  const handleDropdown = (e: any) => {
+    setOpen(!open);
+  };
   return (
     <div className='navbar-main'>
       <div onClick={handleLogoClick} className='pokedex-logo'>
@@ -49,9 +53,19 @@ const Navbar = ({ handlePokemonChange, handleLogoClick }: Props) => {
         </button>
       </form>
       <div>
-        <label htmlFor='grass'>grass</label>
-
-        <input type='checkbox' id='grass' />
+        <select name='type' title='types' className='dropdown-button' onClick={handleDropdown}>
+          <option value='any'>Any Type</option>
+          <option value='7'>Bug</option>
+          <option value='saab'>Dragon</option> <option value='18'>Fairy</option> <option value='10'>Fire</option> <option value='8'>Ghost</option> <option value='5'>Ground</option>{" "}
+          <option value='1'>Normal</option> <option value='saab'>Psychic</option> <option value='9'>Steel</option> <option value='saab'>Dark</option> <option value='13'>Electric</option>{" "}
+          <option value='2'>Fighting</option>
+          <option value='3'>Flying</option>
+          <option value='12'>Grass</option>
+          <option value='saab'>Ice</option>
+          <option value='4'>Poison</option>
+          <option value='6'>Rock</option>
+          <option value='11'>Water</option>
+        </select>
       </div>
     </div>
   );
