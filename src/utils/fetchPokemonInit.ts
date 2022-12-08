@@ -1,5 +1,3 @@
-import { isConstructorDeclaration } from "typescript";
-
 const fetchPokemonInit = (favouritesFetch: any) => {
   let pokePromises: Array<any> = [];
   // Κακος κωδικας, πολυ συγκεκριμενος
@@ -10,8 +8,7 @@ const fetchPokemonInit = (favouritesFetch: any) => {
       pokePromises.push(fetch(url).then((res) => res.json()));
     });
   }
-  for (let i = 1; i <= 15; i++) {
-    console.log(favouritesFetch);
+  for (let i = 1; i <= 35; i++) {
     if (!favouritesFetch.includes(i)) {
       const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
       pokePromises.push(fetch(url).then((res) => res.json()));

@@ -16,15 +16,14 @@ Favourite a pokemon so that it pops up first on the results\
 
 ## To-Do
 
-Search by type\
 Load More\
 Search by multiple types - Change from select to something with multiple choice\
-Testing, Unit and end-to-end\
+Testing, Unit and End-To-End\
 Modal should close when you click outside it\
+Responsive\
 -\
 Split logic from UI\
 Refactor fetchPokemonInit\
-Responsive\
 Add context\
 
 ## Done
@@ -33,6 +32,7 @@ Add context\
 Local Storage\
 CNTRL + F\
 Escape\
+Search by type\
 Loading...\
 Somewhat responsive\
 Random Pokemon\

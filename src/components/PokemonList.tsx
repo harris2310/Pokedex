@@ -17,7 +17,7 @@ type Props = {
 function PokemonList({ pokemon, favourites, handleFavouriteToggle, loading, handleEvolutionClick, evolutions, handleEvolutions, handleRandomizeClick }: Props) {
   return (
     <div className='pokemon-list-main'>
-      <h2>Pokemon</h2>
+      <h2>Pokedex</h2>
       <button type='button' className='randomize-button' onClick={handleRandomizeClick}>
         Randomize
       </button>
