@@ -1,15 +1,21 @@
 const fetchPokemonInit = (favouritesFetch: any) => {
   let pokePromises: Array<any> = [];
+  let urls: Array<string> = [];
+  console.log(favouritesFetch);
   // if there are favourites
-  if (favouritesFetch !== null && favouritesFetch.length !== 0) {
-    favouritesFetch.forEach((f: string) => {
-      let url = `https://pokeapi.co/api/v2/pokemon/${f}`;
-      pokePromises.push(fetch(url).then((res) => res.json()));
-    });
+  // Ασχημο
+  if (favouritesFetch !== null) {
+    if (favouritesFetch.length !== 0) {
+      favouritesFetch.forEach((f: string) => {
+        let url = `https://pokeapi.co/api/v2/pokemon/${f}`;
+        urls.push(url);
+        pokePromises.push(fetch(url).then((res) => res.json()));
+      });
+    }
   }
   for (let i = 1; i <= 35; i++) {
-    if (!favouritesFetch.includes(i)) {
-      const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+    const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+    if (!urls.includes(url)) {
       pokePromises.push(fetch(url).then((res) => res.json()));
     }
   }

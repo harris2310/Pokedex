@@ -26,6 +26,7 @@ Responsive\
 -\
 Split logic from UI\
 Refactor everything\
+Add CI\
 Add global context and possibly useReducer\
 
 ## Done
@@ -39,3 +40,4 @@ Loading...\
 Somewhat responsive\
 Random Pokemon\
 Some animations
+
