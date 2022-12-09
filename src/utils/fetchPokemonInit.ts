@@ -15,7 +15,12 @@ const fetchPokemonInit = (favouritesFetch: any) => {
   }
   for (let i = 1; i <= 35; i++) {
     const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
-    if (!urls.includes(url)) {
+    console.log(urls.length);
+    if (urls.length !== 0) {
+      if (!urls.includes(url)) {
+        pokePromises.push(fetch(url).then((res) => res.json()));
+      }
+    } else {
       pokePromises.push(fetch(url).then((res) => res.json()));
     }
   }

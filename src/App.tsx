@@ -16,6 +16,9 @@ function App() {
     (async () => {
       setLoading(true); // Οχι ιδανικο επειδη δεν ειναι synchrounous το set
       let favouritesArr = JSON.parse(localStorage.getItem("favourites")!); // fetch favourites from Local storage
+      if (favouritesArr == null) {
+        favouritesArr = [];
+      }
       setFavourites(favouritesArr);
       const result = await fetchPokemonInit(favouritesArr);
       setPokemon(result);

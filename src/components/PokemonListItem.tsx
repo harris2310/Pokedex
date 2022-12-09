@@ -5,6 +5,16 @@ import PokemonModal from "./PokemonModal";
 type Props = { pok: any; favourites: Array<number>; handleFavouriteToggle: (e: any) => void; handleEvolutionClick: (e: any) => void; evolutions: any[]; handleEvolutions: (data: any[]) => void };
 
 function PokemonListItem({ pok, favourites, handleFavouriteToggle, handleEvolutionClick, evolutions, handleEvolutions }: Props) {
+  let favouriteClass = "";
+  if (favourites !== null) {
+    if (favourites.includes(pok.id)) {
+      favouriteClass = "item-favourite-gold";
+    } else {
+      favouriteClass = "item-favourite-white";
+    }
+  } else {
+    favouriteClass = "item-favourite-white";
+  }
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -15,7 +25,7 @@ function PokemonListItem({ pok, favourites, handleFavouriteToggle, handleEvoluti
   return (
     <>
       <div onClick={handleOpen} className={open ? "pokemon-list-item" : "pokemon-list-item-anim"}>
-        <div id={pok.id} onClick={handleFavouriteToggle} className={favourites.includes(pok.id) ? "item-favourite-gold" : "item-favourite-white"}>
+        <div id={pok.id} onClick={handleFavouriteToggle} className={favouriteClass}>
           ★
         </div>
         <img src={pok.sprites.front_default} alt='Default Pokemon' width='90' height='90' />
