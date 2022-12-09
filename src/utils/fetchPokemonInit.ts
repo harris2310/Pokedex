@@ -1,6 +1,5 @@
 const fetchPokemonInit = (favouritesFetch: any) => {
   let pokePromises: Array<any> = [];
-  // Κακος κωδικας, πολυ συγκεκριμενος
   // if there are favourites
   if (favouritesFetch !== null && favouritesFetch.length !== 0) {
     favouritesFetch.forEach((f: string) => {
