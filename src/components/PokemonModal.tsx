@@ -13,11 +13,6 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, hand
         handleClose(event);
       }
     };
-    const clickHandler = (e: any) => {
-      if (!e.target.classList.contains("modal-content")) {
-        handleClose(e);
-      }
-    };
     document.addEventListener("keydown", keyDownHandler);
     (async () => {
       let data = await (await fetch(pok.species.url)).json();

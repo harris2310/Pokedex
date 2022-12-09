@@ -19,8 +19,8 @@ function App() {
       if (favouritesArr == null) {
         favouritesArr = [];
       }
-      setFavourites(favouritesArr);
       setLoading(true); // Οχι ιδανικο επειδη δεν ειναι synchrounous το set
+      setFavourites(favouritesArr);
       const result = await fetchPokemonInit(favouritesArr);
       setPokemon(result);
       setLoading(false);
