@@ -9,7 +9,6 @@ import fetchRandom from "./utils/fetchRandom";
 function App() {
   const [pokemon, setPokemon] = useState<PokeList>([]);
   const [favourites, setFavourites] = useState<any>([]);
-  const [evolutions, setEvolutions] = useState<Array<any>>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -38,15 +37,13 @@ function App() {
     setLoading(false);
   };
 
-  const handleEvolutionClick = (e: any) => {
+  const handleEvolutionClick = (e: any, evolutions: any) => {
     const evolutionInd = e.target.getAttribute("data-ev");
     if (e.target.id !== "selected") {
       setPokemon([evolutions[evolutionInd]]);
     }
   };
-  const handleEvolutions = (data: Array<any>) => {
-    setEvolutions(data);
-  };
+
   const handleFavouriteToggle = (e: any) => {
     e.stopPropagation(); // Ωστε να μην κανει trigger και το modal onClick
     const target = parseInt(e.target.id);
@@ -76,8 +73,6 @@ function App() {
         handleFavouriteToggle={handleFavouriteToggle}
         loading={loading}
         handleEvolutionClick={handleEvolutionClick}
-        evolutions={evolutions}
-        handleEvolutions={handleEvolutions}
         handleRandomizeClick={handleRandomizeClick}
       />
     </div>

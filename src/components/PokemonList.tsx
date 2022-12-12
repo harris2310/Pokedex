@@ -8,13 +8,11 @@ type Props = {
   favourites: Array<number>;
   handleFavouriteToggle: (e: any) => void;
   loading: boolean;
-  handleEvolutionClick: (e: any) => void;
-  evolutions: any[];
-  handleEvolutions: (data: any[]) => void;
+  handleEvolutionClick: (e: any, evolutions: any) => void;
   handleRandomizeClick: () => void;
 };
 
-function PokemonList({ pokemon, favourites, handleFavouriteToggle, loading, handleEvolutionClick, evolutions, handleEvolutions, handleRandomizeClick }: Props) {
+function PokemonList({ pokemon, favourites, handleFavouriteToggle, loading, handleEvolutionClick, handleRandomizeClick }: Props) {
   return (
     <div className='pokemon-list-main'>
       <h2>Pokedex</h2>
@@ -28,14 +26,7 @@ function PokemonList({ pokemon, favourites, handleFavouriteToggle, loading, hand
           {pokemon.map((pok: any) => {
             return (
               <div key={pok.name}>
-                <PokemonListItem
-                  pok={pok}
-                  favourites={favourites}
-                  handleFavouriteToggle={handleFavouriteToggle}
-                  handleEvolutionClick={handleEvolutionClick}
-                  evolutions={evolutions}
-                  handleEvolutions={handleEvolutions}
-                />
+                <PokemonListItem pok={pok} favourites={favourites} handleFavouriteToggle={handleFavouriteToggle} handleEvolutionClick={handleEvolutionClick} />
               </div>
             );
           })}

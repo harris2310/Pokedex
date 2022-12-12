@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../styles/PokemonModal.css";
 import type { PokeListModal } from "../types";
 import { statToShow } from "../utils/statToShow";
-import { fetchEvolutions } from "../utils/fetchEvolutions";
+import useFetchEvolutions from "../hooks/useFetchEvolutions";
 
-const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, handleEvolutions }: PokeListModal) => {
+const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal) => {
   const [loading, setLoading] = useState(true);
+  const evolutions = useFetchEvolutions(pok);
   useEffect(() => {
     const keyDownHandler = (event: any) => {
       if (event.key === "Escape") {
@@ -14,22 +15,16 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, hand
       }
     };
     document.addEventListener("keydown", keyDownHandler);
-    (async () => {
-      let data = await (await fetch(pok.species.url)).json();
-      let ev_data = await (await fetch(data.evolution_chain.url)).json();
-      let ev1URL = ev_data.chain.species.url;
-      let ev2URL = ev_data.chain?.evolves_to[0]?.species?.url;
-      let ev3URL = ev_data.chain?.evolves_to[0]?.evolves_to[0]?.species.url;
-      const data1 = await fetchEvolutions(ev1URL);
-      const data2 = await fetchEvolutions(ev2URL);
-      const data3 = await fetchEvolutions(ev3URL);
-      handleEvolutions([data1, data2, data3]);
-      setLoading(false);
-    })();
+    setLoading(false);
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
-  }, []);
+  });
+
+  const handleEvolutionBefore = (e: any) => {
+    e.preventDefault();
+    handleEvolutionClick(e, evolutions); // passing evolutions state to parent handler, POSSIBLY BAD??!!
+  };
 
   return (
     <>
@@ -73,8 +68,8 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick, evolutions, hand
                 if (ev !== undefined) {
                   return (
                     <div key={ev.name} className='evolutions-flex-item'>
-                      <img data-ev={i} id={ev.name === pok.name ? "selected" : ""} alt='Evolution' width='60' height='60' src={ev.sprites.front_default} onClick={handleEvolutionClick} />
-                      <div data-ev={i} id={ev.name === pok.name ? "selected" : ""} style={{ fontSize: "15px" }} onClick={handleEvolutionClick}>
+                      <img data-ev={i} id={ev.name === pok.name ? "selected" : ""} alt='Evolution' width='60' height='60' src={ev.sprites.front_default} onClick={handleEvolutionBefore} />
+                      <div data-ev={i} id={ev.name === pok.name ? "selected" : ""} style={{ fontSize: "15px" }} onClick={handleEvolutionBefore}>
                         {ev.name.charAt(0).toUpperCase() + ev.name.slice(1)}
                       </div>
                     </div>

@@ -11,7 +11,5 @@ export type PokeListModal = {
     stats: Array<{ base_stat: number; effort: number; stat: { name: string; url: string } }>;
   };
   handleClose: (e: any) => void;
-  handleEvolutionClick: (e: any) => void;
-  evolutions: any[];
-  handleEvolutions: (data: any[]) => void;
+  handleEvolutionClick: (e: any, evolutions: any) => void;
 };
