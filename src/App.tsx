@@ -10,8 +10,7 @@ import { useContext } from "react";
 //import useFetchPokemon from "./hooks/useFetchPokemon";
 
 function App() {
-  const { pokemon, setPokemon } = useContext(GlobalContext);
-  const [favourites, setFavourites] = useState<any>([]);
+  const { pokemon, setPokemon, favourites, setFavourites } = useContext(GlobalContext);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -28,10 +27,6 @@ function App() {
       setLoading(false);
     })();
   }, []);
-
-  const handlePokemonChange = (data: any) => {
-    setPokemon(data);
-  };
 
   const handleLogoClick = async (e: any) => {
     setLoading(true); // Οχι ιδανικο επειδη δεν ειναι synchrounous το set
@@ -62,8 +57,8 @@ function App() {
   };
   return (
     <div className='App'>
-      <Navbar favourites={favourites} handlePokemonChange={handlePokemonChange} handleLogoClick={handleLogoClick} />
-      <PokemonList favourites={favourites} handleFavouriteToggle={handleFavouriteToggle} loading={loading} handleRandomizeClick={handleRandomizeClick} />
+      <Navbar handleLogoClick={handleLogoClick} />
+      <PokemonList handleFavouriteToggle={handleFavouriteToggle} loading={loading} handleRandomizeClick={handleRandomizeClick} />
     </div>
   );
 }

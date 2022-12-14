@@ -9,7 +9,8 @@ type Props = {
 
 const GlobalProvider: React.FC<Props> = ({ children }) => {
   const [pokemon, setPokemon] = useState<PokeList>([]);
-  return <GlobalContext.Provider value={{ pokemon, setPokemon }}>{children}</GlobalContext.Provider>;
+  const [favourites, setFavourites] = useState<any>([]);
+  return <GlobalContext.Provider value={{ pokemon, setPokemon, favourites, setFavourites }}>{children}</GlobalContext.Provider>;
 };
 
 export { GlobalContext, GlobalProvider };

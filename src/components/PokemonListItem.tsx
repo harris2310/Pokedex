@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { GlobalContext } from "../context/GlobalContext";
 import "../styles/PokemonListItem.css";
 import PokemonModal from "./PokemonModal";
 
-type Props = { pok: any; favourites: Array<number>; handleFavouriteToggle: (e: any) => void };
+type Props = { pok: any; handleFavouriteToggle: (e: any) => void };
 
-function PokemonListItem({ pok, favourites, handleFavouriteToggle }: Props) {
+function PokemonListItem({ pok, handleFavouriteToggle }: Props) {
+  const [open, setOpen] = useState(false);
+  const { favourites } = useContext(GlobalContext);
   let favouriteClass = "";
+
   if (favourites !== null) {
     if (favourites.includes(pok.id)) {
       favouriteClass = "item-favourite-gold";
@@ -15,13 +19,15 @@ function PokemonListItem({ pok, favourites, handleFavouriteToggle }: Props) {
   } else {
     favouriteClass = "item-favourite-white";
   }
-  const [open, setOpen] = useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
+
   const handleClose = (e: any) => {
     setOpen(false);
   };
+
   return (
     <>
       <div onClick={handleOpen} className={open ? "pokemon-list-item" : "pokemon-list-item-anim"}>
