@@ -18,19 +18,18 @@ Favourite a pokemon so that it pops up first on the results\
 
 ## To-Do
 
-Load More Pokemon\
-Search by multiple types - Change from select to something with multiple choice\
 Testing, Unit and End-To-End\
+Search by multiple types - Change from select to something with multiple choice\
 Modal should close when you click outside it\
-Responsive\
 -\
-Split logic from UI\
-Refactor everything\
+Load More Pokemon\
 Add CI\
-Add global context and possibly useReducer\
+Responsive\
 
 ## Done
 
+Add global context and possibly useReducer\
+Split logic from UI\
 Ολα τα required\
 Local Storage\
 CNTRL + F\
