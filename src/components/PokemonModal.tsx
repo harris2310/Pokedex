@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../styles/PokemonModal.css";
-import type { PokeListModal } from "../types";
+import type { GContext, PokeListModal } from "../types";
 import { statToShow } from "../utils/statToShow";
 import useFetchEvolutions from "../hooks/useFetchEvolutions";
 import { GlobalContext } from "../context/GlobalContext";
 
 const PokemonModal = ({ pok, handleClose }: PokeListModal) => {
   const [evolutionsLoading, setEvolutionsLoading] = useState(true); // loading for evolutions
-  const { setPokemon } = useContext(GlobalContext);
+  const { setPokemon } = useContext(GlobalContext) as GContext;
   const evolutions = useFetchEvolutions(pok);
   useEffect(() => {
     const keyDownHandler = (event: any) => {

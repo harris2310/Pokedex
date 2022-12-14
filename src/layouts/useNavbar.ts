@@ -2,12 +2,13 @@ import React, { useState, useContext, useRef, FormEvent, SyntheticEvent } from "
 import fetchPokemonInit from "../utils/fetchPokemonInit";
 import { GlobalContext } from "../context/GlobalContext";
 import fetchPokemonByType from "../utils/fetchPokemonByType";
+import { GContext } from "../types";
 
 function useNavbar() {
   const [value, setValue] = useState<string>("");
   const [types, setTypes] = useState<string>("Any");
   const [fetchError, setFetchError] = useState(false);
-  const { favourites, setPokemon, setLoading } = useContext(GlobalContext);
+  const { favourites, setPokemon, setLoading } = useContext(GlobalContext) as GContext;
   const focused = useRef<any>(false);
 
   const handlePokemonChange = (data: any) => {

@@ -2,46 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import "../styles/PokemonListItem.css";
 import PokemonModal from "./PokemonModal";
+import usePokemonListItem from "./usePokemonListItem";
 
-type Props = { pok: any };
-
-function PokemonListItem({ pok }: Props) {
-  const [open, setOpen] = useState(false);
-  const { favourites, setFavourites } = useContext(GlobalContext);
-  let favouriteClass = "";
-
-  if (favourites !== null) {
-    if (favourites.includes(pok.id)) {
-      favouriteClass = "item-favourite-gold";
-    } else {
-      favouriteClass = "item-favourite-white";
-    }
-  } else {
-    favouriteClass = "item-favourite-white";
-  }
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (e: any) => {
-    setOpen(false);
-  };
-
-  const handleFavouriteToggle = (e: any) => {
-    e.stopPropagation(); // Ωστε να μην κανει trigger και το modal onClick
-    const target = parseInt(e.target.id);
-    if (favourites.includes(target)) {
-      let newFavourites = favourites.filter((f: number) => f !== target);
-      console.log(newFavourites);
-      localStorage.setItem("favourites", JSON.stringify(newFavourites));
-      setFavourites(newFavourites);
-    } else {
-      let newFavourites = [target, ...favourites];
-      localStorage.setItem("favourites", JSON.stringify(newFavourites));
-      setFavourites(newFavourites);
-    }
-  };
+function PokemonListItem({ pok }: any) {
+  const { open, handleOpen, handleClose, handleFavouriteToggle, favouriteClass } = usePokemonListItem(pok);
   return (
     <>
       <div onClick={handleOpen} className={open ? "pokemon-list-item" : "pokemon-list-item-anim"}>

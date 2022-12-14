@@ -5,9 +5,10 @@ import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import fetchRandom from "../utils/fetchRandom";
 import fetchPokemonInit from "../utils/fetchPokemonInit";
+import { GContext } from "../types";
 
 function PokemonList() {
-  const { pokemon, setPokemon, loading, setLoading, setFavourites } = useContext(GlobalContext);
+  const { pokemon, setPokemon, loading, setLoading, setFavourites } = useContext(GlobalContext) as GContext;
 
   useEffect(() => {
     (async () => {
