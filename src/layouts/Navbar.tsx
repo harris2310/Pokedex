@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Navbar.css";
 import pokedexURL from "../logo.png";
 
-import useNavbar from "./useNavbar";
+import useNavbar from "../containers/useNavbar";
 
 const Navbar = () => {
   const { fetchError, focused, handleInputChange, handleSearchSubmit, handleTypeSelect, handleLogoClick } = useNavbar();

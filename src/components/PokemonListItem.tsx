@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../context/GlobalContext";
+import React from "react";
 import "../styles/PokemonListItem.css";
 import PokemonModal from "./PokemonModal";
-import usePokemonListItem from "./usePokemonListItem";
+import usePokemonListItem from "../containers/usePokemonListItem";
 
 function PokemonListItem({ pok }: any) {
   const { open, handleOpen, handleClose, handleFavouriteToggle, favouriteClass } = usePokemonListItem(pok);
