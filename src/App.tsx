@@ -5,9 +5,12 @@ import "./styles/App.css";
 import type { PokeList } from "./types";
 import fetchPokemonInit from "./utils/fetchPokemonInit";
 import fetchRandom from "./utils/fetchRandom";
+import { GlobalContext } from "./context/GlobalContext";
+import { useContext } from "react";
+//import useFetchPokemon from "./hooks/useFetchPokemon";
 
 function App() {
-  const [pokemon, setPokemon] = useState<PokeList>([]);
+  const { pokemon, setPokemon } = useContext(GlobalContext);
   const [favourites, setFavourites] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -18,8 +21,8 @@ function App() {
       if (favouritesArr == null) {
         favouritesArr = [];
       }
-      setLoading(true); // Οχι ιδανικο επειδη δεν ειναι synchrounous το set
       setFavourites(favouritesArr);
+      setLoading(true); // Οχι ιδανικο επειδη δεν ειναι synchrounous το set
       const result = await fetchPokemonInit(favouritesArr);
       setPokemon(result);
       setLoading(false);
@@ -35,13 +38,6 @@ function App() {
     const result = await fetchPokemonInit(favourites);
     setPokemon(result);
     setLoading(false);
-  };
-
-  const handleEvolutionClick = (e: any, evolutions: any) => {
-    const evolutionInd = e.target.getAttribute("data-ev");
-    if (e.target.id !== "selected") {
-      setPokemon([evolutions[evolutionInd]]);
-    }
   };
 
   const handleFavouriteToggle = (e: any) => {
@@ -67,14 +63,7 @@ function App() {
   return (
     <div className='App'>
       <Navbar favourites={favourites} handlePokemonChange={handlePokemonChange} handleLogoClick={handleLogoClick} />
-      <PokemonList
-        pokemon={pokemon}
-        favourites={favourites}
-        handleFavouriteToggle={handleFavouriteToggle}
-        loading={loading}
-        handleEvolutionClick={handleEvolutionClick}
-        handleRandomizeClick={handleRandomizeClick}
-      />
+      <PokemonList favourites={favourites} handleFavouriteToggle={handleFavouriteToggle} loading={loading} handleRandomizeClick={handleRandomizeClick} />
     </div>
   );
 }

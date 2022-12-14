@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import "../styles/PokemonListItem.css";
 import PokemonModal from "./PokemonModal";
 
-type Props = { pok: any; favourites: Array<number>; handleFavouriteToggle: (e: any) => void; handleEvolutionClick: (e: any, evolutions: any) => void };
+type Props = { pok: any; favourites: Array<number>; handleFavouriteToggle: (e: any) => void };
 
-function PokemonListItem({ pok, favourites, handleFavouriteToggle, handleEvolutionClick }: Props) {
+function PokemonListItem({ pok, favourites, handleFavouriteToggle }: Props) {
   let favouriteClass = "";
   if (favourites !== null) {
     if (favourites.includes(pok.id)) {
@@ -35,7 +35,7 @@ function PokemonListItem({ pok, favourites, handleFavouriteToggle, handleEvoluti
         </div>
         {/* Αν το state ειναι open render την open class */}
       </div>
-      <div className={open ? "modal-open" : "modal-closed"}> {open ? <PokemonModal pok={pok} handleClose={handleClose} handleEvolutionClick={handleEvolutionClick} /> : ""}</div>
+      <div className={open ? "modal-open" : "modal-closed"}> {open ? <PokemonModal pok={pok} handleClose={handleClose} /> : ""}</div>
     </>
   );
 }

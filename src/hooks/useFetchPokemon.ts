@@ -1,32 +1,27 @@
 /*
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, SetStateAction } from "react";
 import fetchPokemonInit from "../utils/fetchPokemonInit";
 import type { PokeList } from "../types";
 
-const useFetchPokemon = (): React.ComponentState => {
-  const [pokemon, setPokemon] = useState<PokeList>([]);
+type Props = {
+  loading: boolean;
+  setPokemon: SetStateAction;
+};
 
-  const [loading, setLoading] = useState<boolean>(false);
-
+const useFetchPokemon = ({ loading, setLoading, setPokemon }: Props): React.ComponentState => {
   useEffect(() => {
     (async () => {
-      let favouritesArr = JSON.parse(localStorage.getItem("favourites")!); // fetch favourites from Local storage
-      // Το κανω empty array αν ειναι Null για να ναι πιο ευκολο να χειριστω οταν δεν εχει favourites το local Storage
-      if (favouritesArr == null) {
-        favouritesArr = [];
+      if (loading === true) {
+        const result = await fetchPokemonInit(favouritesArr);
+        setPokemon(result);
       }
-      setFavourites(favouritesArr);
-      setLoading(true); // Οχι ιδανικο επειδη δεν ειναι synchrounous το set
-      const result = await fetchPokemonInit(favouritesArr);
-      setPokemon(result);
       setLoading(false);
     })();
-  }, []);
-  return { pokemon, loading };
+  }, [loading]);
+  return {};
 };
 
 export default useFetchPokemon;
-
 */
 
 export {};

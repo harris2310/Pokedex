@@ -2,17 +2,18 @@ import React from "react";
 import "../styles/PokemonList.css";
 import type { PokeList } from "../types";
 import PokemonListItem from "./PokemonListItem";
+import { useContext } from "react";
+import { GlobalContext, GlobalProvider } from "../context/GlobalContext";
 
 type Props = {
-  pokemon: PokeList;
   favourites: Array<number>;
   handleFavouriteToggle: (e: any) => void;
   loading: boolean;
-  handleEvolutionClick: (e: any, evolutions: any) => void;
   handleRandomizeClick: () => void;
 };
 
-function PokemonList({ pokemon, favourites, handleFavouriteToggle, loading, handleEvolutionClick, handleRandomizeClick }: Props) {
+function PokemonList({ favourites, handleFavouriteToggle, loading, handleRandomizeClick }: Props) {
+  const { pokemon } = useContext(GlobalContext);
   return (
     <div className='pokemon-list-main'>
       <h2>Pokedex</h2>
@@ -26,7 +27,7 @@ function PokemonList({ pokemon, favourites, handleFavouriteToggle, loading, hand
           {pokemon.map((pok: any) => {
             return (
               <div key={pok.name}>
-                <PokemonListItem pok={pok} favourites={favourites} handleFavouriteToggle={handleFavouriteToggle} handleEvolutionClick={handleEvolutionClick} />
+                <PokemonListItem pok={pok} favourites={favourites} handleFavouriteToggle={handleFavouriteToggle} />
               </div>
             );
           })}

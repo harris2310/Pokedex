@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../styles/PokemonModal.css";
 import type { PokeListModal } from "../types";
 import { statToShow } from "../utils/statToShow";
 import useFetchEvolutions from "../hooks/useFetchEvolutions";
+import { GlobalContext } from "../context/GlobalContext";
 
-const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal) => {
-  const [loading, setLoading] = useState(true);
+const PokemonModal = ({ pok, handleClose }: PokeListModal) => {
+  const [evolutionsLoading, setEvolutionsLoading] = useState(true); // loading for evolutions
+  const { setPokemon } = useContext(GlobalContext);
   const evolutions = useFetchEvolutions(pok);
   useEffect(() => {
     const keyDownHandler = (event: any) => {
@@ -15,7 +17,7 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal)
       }
     };
     document.addEventListener("keydown", keyDownHandler);
-    setLoading(false);
+    setEvolutionsLoading(false);
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
     };
@@ -23,7 +25,10 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal)
 
   const handleEvolutionBefore = (e: any) => {
     e.preventDefault();
-    handleEvolutionClick(e, evolutions); // passing evolutions state to parent handler, POSSIBLY BAD??!!
+    const evolutionInd = e.target.getAttribute("data-ev");
+    if (e.target.id !== "selected") {
+      setPokemon([evolutions[evolutionInd]]);
+    }
   };
 
   return (
@@ -60,7 +65,7 @@ const PokemonModal = ({ pok, handleClose, handleEvolutionClick }: PokeListModal)
         <div className='evolutions-flex'>
           Evolutions:
           {/* Hack - Για να μειωθει το layout shift*/}
-          {loading ? (
+          {evolutionsLoading ? (
             <div style={{ height: "130px" }}>...</div>
           ) : (
             <>
