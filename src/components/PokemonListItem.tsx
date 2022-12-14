@@ -3,11 +3,11 @@ import { GlobalContext } from "../context/GlobalContext";
 import "../styles/PokemonListItem.css";
 import PokemonModal from "./PokemonModal";
 
-type Props = { pok: any; handleFavouriteToggle: (e: any) => void };
+type Props = { pok: any };
 
-function PokemonListItem({ pok, handleFavouriteToggle }: Props) {
+function PokemonListItem({ pok }: Props) {
   const [open, setOpen] = useState(false);
-  const { favourites } = useContext(GlobalContext);
+  const { favourites, setFavourites } = useContext(GlobalContext);
   let favouriteClass = "";
 
   if (favourites !== null) {
@@ -28,6 +28,20 @@ function PokemonListItem({ pok, handleFavouriteToggle }: Props) {
     setOpen(false);
   };
 
+  const handleFavouriteToggle = (e: any) => {
+    e.stopPropagation(); // Ωστε να μην κανει trigger και το modal onClick
+    const target = parseInt(e.target.id);
+    if (favourites.includes(target)) {
+      let newFavourites = favourites.filter((f: number) => f !== target);
+      console.log(newFavourites);
+      localStorage.setItem("favourites", JSON.stringify(newFavourites));
+      setFavourites(newFavourites);
+    } else {
+      let newFavourites = [target, ...favourites];
+      localStorage.setItem("favourites", JSON.stringify(newFavourites));
+      setFavourites(newFavourites);
+    }
+  };
   return (
     <>
       <div onClick={handleOpen} className={open ? "pokemon-list-item" : "pokemon-list-item-anim"}>

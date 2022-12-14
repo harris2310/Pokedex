@@ -7,12 +7,20 @@ function useNavbar() {
   const [value, setValue] = useState<string>("");
   const [types, setTypes] = useState<string>("Any");
   const [fetchError, setFetchError] = useState(false);
-  const { favourites, setPokemon } = useContext(GlobalContext);
+  const { favourites, setPokemon, setLoading } = useContext(GlobalContext);
   const focused = useRef<any>(false);
 
   const handlePokemonChange = (data: any) => {
     setPokemon(data);
   };
+
+  const handleLogoClick = async (e: any) => {
+    setLoading(true); // Οχι ιδανικο επειδη δεν ειναι synchrounous το set
+    const result = await fetchPokemonInit(favourites);
+    setPokemon(result);
+    setLoading(false);
+  };
+
   // CNTR-F focus search bar
   window.onkeydown = function (e) {
     if (e.key === "f" && e.ctrlKey) {
@@ -63,7 +71,7 @@ function useNavbar() {
   const handleTypeSelect = (e: any) => {
     setTypes(e.target.value);
   };
-  return { value, types, fetchError, focused, handleInputChange, handleSearchSubmit, handleTypeSelect };
+  return { value, types, fetchError, focused, handleInputChange, handleSearchSubmit, handleTypeSelect, handleLogoClick };
 }
 
 export default useNavbar;

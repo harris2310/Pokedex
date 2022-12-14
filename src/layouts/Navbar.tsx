@@ -4,10 +4,8 @@ import pokedexURL from "../logo.png";
 
 import useNavbar from "./useNavbar";
 
-type Props = { handleLogoClick: (e: any) => void };
-
-const Navbar = ({ handleLogoClick }: Props) => {
-  const { fetchError, focused, handleInputChange, handleSearchSubmit, handleTypeSelect } = useNavbar();
+const Navbar = () => {
+  const { fetchError, focused, handleInputChange, handleSearchSubmit, handleTypeSelect, handleLogoClick } = useNavbar();
   return (
     <div className='navbar-main'>
       <div onClick={handleLogoClick} className='pokedex-logo'>
