@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PokemonList from "./components/PokemonList";
 import Navbar from "./layouts/Navbar";
 import "./styles/App.css";
