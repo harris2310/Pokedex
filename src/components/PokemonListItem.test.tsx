@@ -1,5 +1,6 @@
-import { render } from "react-dom";
+import { render } from "@testing-library/react";
 import PokemonListItem from "./PokemonListItem";
+import usePokemonListItem from "../containers/usePokemonListItem";
 
 let pok = {
   height: 7,
@@ -10,13 +11,11 @@ let pok = {
   types: { slot: 1, type: { name: "normal", url: "..." } },
   stats: { base_stat: "HP", effort: 0, stat: { name: "HP", url: "..." } },
 };
-/*
+
 describe("Component should render if favourites is empty", () => {
-  beforeEach(() => {
-    jest.spyOn;
-  });
+  beforeEach(() => {});
   test("The test", () => {
-    const { container} = render(<PokemonListItem favourites={[]} pok={pok} evolutions={[]} handleFavouriteToggle={() => void} />);
+    render(<PokemonListItem pok={pok} />);
+    expect(screen).toHaveTextContent("hi");
   });
 });
-*/
