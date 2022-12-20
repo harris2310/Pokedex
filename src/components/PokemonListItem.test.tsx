@@ -1,9 +1,8 @@
 /* eslint-disable no-restricted-globals */
-import { render, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
 import PokemonListItem from "./PokemonListItem";
-import usePokemonListItem from "../containers/usePokemonListItem";
 import { GlobalContext } from "../context/GlobalContext";
 
 let pok = {
@@ -17,6 +16,12 @@ let pok = {
   stats: { base_stat: "HP", effort: 0, stat: { name: "HP", url: "..." } },
 };
 
+const mock = { open: false, handleOpen: jest.fn(), handleClose: () => {}, handleFavouriteToggle: () => {}, favouriteClass: "item-favourite-white" };
+
+jest.mock("../containers/usePokemonListItem", () => {
+  return () => mock;
+});
+
 describe("Component should render if favourites is empty", () => {
   beforeAll(() => {});
   test("The test", () => {
@@ -26,8 +31,8 @@ describe("Component should render if favourites is empty", () => {
       </GlobalContext.Provider>,
     );
     fireEvent.click(screen.getByText("★"));
-    const star = container.firstChild();
-    expect(handleOpen).toBeCalled;
-    expect(container).toHaveTextContent("hi");
+    fireEvent.click(screen.getByText("★"));
+    expect(mock.handleOpen).toHaveBeenCalled();
+    expect(container).toHaveTextContent("★Snorlax");
   });
 });
