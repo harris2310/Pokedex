@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
 
+env:
+  ## Sets environment variable
+  CI: False
+
 jobs:
   build:
     runs-on: ubuntu-latest
